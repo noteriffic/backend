@@ -6,7 +6,7 @@ module.exports = {
     connection: {
       host: "localhost",
       port: 8100,
-      database: "notes-data",
+      database: "noterrific",
       user: "postgres",
       password: process.env.DB_DEV_PASSWORD
     },
