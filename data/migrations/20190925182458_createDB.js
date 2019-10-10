@@ -13,6 +13,8 @@ exports.up = function(knex) {
       table.string("email", 60).notNullable();
 
       table.string("country", 60).notNullable();
+
+      table.timestamps(true, true);
     })
     .createTable("notes", table => {
       table.increments();
@@ -28,9 +30,11 @@ exports.up = function(knex) {
         .inTable("users")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
+
+      table.timestamps(true, true);
     });
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists("users");
+  return knex.schema.dropTableIfExists("notes").dropTableIfExists("users");
 };
