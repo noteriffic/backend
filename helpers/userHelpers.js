@@ -14,7 +14,14 @@ const findById = id => {
     .first();
 };
 
+const login = filter => {
+  return db("users")
+    .where(filter)
+    .first();
+};
+
 module.exports = {
   register,
-  findById
+  findById,
+  login
 };
