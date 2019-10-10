@@ -37,7 +37,20 @@ const checkNewUser = (req, res, next) => {
   }
 };
 
+const checkLogin = (req, res, next) => {
+  const { username, password } = req.body;
+
+  if (username && password) {
+    next();
+  } else {
+    res
+      .status(400)
+      .json({ message: "username and password are both required" });
+  }
+};
+
 module.exports = {
   checkNewUser,
-  checkUsername
+  checkUsername,
+  checkLogin
 };
