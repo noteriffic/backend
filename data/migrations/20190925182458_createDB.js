@@ -3,6 +3,10 @@ exports.up = function(knex) {
     .createTable("users", table => {
       table.increments();
 
+      table.string("firstName", 40).notNullable();
+
+      table.string("lastName", 60).notNullable();
+
       table
         .string("username", 20)
         .notNullable()
