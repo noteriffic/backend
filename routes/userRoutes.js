@@ -26,4 +26,20 @@ router.post(
   }
 );
 
+router.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const user = await User.login({ username });
+    const compare = bcrypt.compareSync(password, user.password);
+    if (compare && user) {
+      req.session.user = user;
+      res.status(200).json({ message: `Welcome, ${user.username}`, user });
+    } else {
+      res.stataus(400).json({ message: "Invalid Credentials" });
+    }
+  } catch (err) {
+    res.status(500).json({ message: "Server could not log user in" });
+  }
+});
+
 module.exports = router;
