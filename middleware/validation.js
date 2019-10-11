@@ -49,8 +49,21 @@ const checkLogin = (req, res, next) => {
   }
 };
 
+const checkNewNote = (req, res, next) => {
+  const { title, body } = req.body;
+
+  if (title && body) {
+    next();
+  } else {
+    res.status(400).json({
+      message: "A valid title and body are required to create a new note"
+    });
+  }
+};
+
 module.exports = {
   checkNewUser,
   checkUsername,
-  checkLogin
+  checkLogin,
+  checkNewNote
 };
