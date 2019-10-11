@@ -6,7 +6,8 @@ const KnexSessionStore = require("connect-session-knex")(session);
 const dbconnection = require("../data/db-config");
 
 // routes
-const userRoutes = require("../routes/userRoutes");
+const usersRoutes = require("../routes/userRoutes");
+const notesRoutes = require("../routes/notesRoutes");
 
 const server = express();
 
@@ -38,7 +39,8 @@ const sessConfig = {
 };
 server.use(session(sessConfig));
 
-server.use("/user", userRoutes);
+server.use("/api/users", usersRoutes);
+server.use("/api/notes", notesRoutes);
 
 server.get("/api", (req, res) => {
   res.status(200).json({ message: "API up" });
