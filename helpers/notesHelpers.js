@@ -17,9 +17,14 @@ const createNote = newNote => {
 
 const findByUser = userId => {
   return db("users")
-    .where({ id: userId })
     .join("notes", "users.id", "notes.user_id")
-    .select("notes.title", "notes.body", "notes.createdAt", "notes.updatedAt");
+    .where({ "users.id": userId })
+    .select(
+      "notes.title",
+      "notes.body",
+      "notes.created_at",
+      "notes.updated_at"
+    );
 };
 
 module.exports = {
