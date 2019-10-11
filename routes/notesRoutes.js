@@ -19,4 +19,23 @@ router.post("/create", mw.checkNewNote, async (req, res) => {
   }
 });
 
+router.get("/user/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const notes = await Notes.findByUser(id);
+
+    if (notes) {
+      res.status(200).json(notes);
+    } else {
+      res
+        .status(400)
+        .json({ message: "Could not find notes for specified user" });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server error getting notes" });
+  }
+});
+
 module.exports = router;
